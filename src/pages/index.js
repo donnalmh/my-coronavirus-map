@@ -6,6 +6,8 @@ import Container from 'components/Container';
 import Map from 'components/Map';
 import Snippet from 'components/Snippet';
 
+import axios from 'axios'
+
 
 const LOCATION = {
   lat: 38.9072,
@@ -24,7 +26,16 @@ const IndexPage = () => {
    */
 
   async function mapEffect({ leafletElement: map } = {}) {
+    let response;
 
+    try {
+      response = await axios.get('https://corona.lmao.ninja/v2/countries')
+    } catch (e) {
+      console.log(`Failed to fetch countries ${e.message}`,e)
+      return;
+    }
+
+    const { data = [] } = response;
   }
 
   const mapSettings = {
